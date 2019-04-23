@@ -7,8 +7,8 @@ package clases;
 
 /**
  *
- * @author Adrian
+ * @author 1DAM
  */
-public class Entrantes extends Productos{
+public class Camarero {
     
 }

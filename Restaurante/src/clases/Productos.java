@@ -11,7 +11,18 @@ package clases;
  */
 public class Productos {
     private String nombre;
-    private String tipoDeProducto;
+    private TipoPlato tipoDeProducto;
     private String precio;
+    
+    
+    public enum TipoPlato{
+        ENTRANTE,
+        MEDIO_ENTRANTE,
+        COMIDA_PRINCIPAL,
+        REFRESCO,
+        VINOS,
+        LICORES,
+        POSTRES,
+    }
     
 }

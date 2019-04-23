@@ -5,10 +5,14 @@
  */
 package clases;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author Adrian
  */
-public class Factura {
-    
+public class Factura extends Mesa{
+     private int numeroMesa;
+    private Productos[] productosConsumidos;
+    private LocalDateTime fecha;
 }
