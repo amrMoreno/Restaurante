@@ -10,5 +10,8 @@ package clases;
  * @author 1DAM
  */
 public class Productos {
+    private String nombre;
+    private String tipoDeProducto;
+    private String precio;
     
 }

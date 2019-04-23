@@ -7,7 +7,7 @@ package restaurante;
 
 /**
  *
- * @author 1DAM
+ * @author Adrian Moreno Ruiz
  */
 public class Restaurante {
 
