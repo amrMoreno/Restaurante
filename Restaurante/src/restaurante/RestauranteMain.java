@@ -46,7 +46,8 @@ public class RestauranteMain {
                 + "\n\t5 - Copas"
                 + "\n\t6 - Licores"
                 + "\n\t7 - Vinos"
-                + "\n\t8 - Registrar camarero";
+                + "\n\t8 - Registrar camarero"
+                 + "\n\t9 - Eliminar camarero";
 
         int action = 0;
         do {
@@ -144,10 +145,15 @@ public class RestauranteMain {
                         sttt.close();
                         break;
                          case 8:
-                        System.out.println("Registra usuario");
+                        System.out.println("Registra camarero");
                              registerUser(sc, con);
+                             System.out.println("Camarero Registrado");
                         break;
-                        
+                        case 9:
+                        System.out.println("Eliminar  camarero");
+                            eliminarUser(sc, con);
+                             System.out.println("Camarero Eliminado");
+                        break;
                     default:
                         System.out.println("Opcion incorrecta");
 
@@ -174,18 +180,16 @@ public class RestauranteMain {
             System.out.println("Dni:");
             String dni=sc.nextLine();
             System.out.println("Tipo de camarero");
-            String tipo=sc.nextLine();
+            String tipoDeCamarero=sc.nextLine();
             
             
             
-            Camarero actual=new Camarero(dni, nombre,tipo);
+            
+            Camarero actual=new Camarero(dni, nombre,tipoDeCamarero);
       
             Statement registerStatement=conn.createStatement();
             registerStatement.executeUpdate(
-                    "insert into camarero (dni,nombre,tipoDeCamarero"
-                            + ") values('"+nombre+"',"
-                                    + "'"+dni+"','"+
-                            "','"+tipo+"');");
+                    "insert into camarero (dni,nombre,tipoDeCamarero) values('"+dni+"','"+nombre+"','"+tipoDeCamarero+"')");
             registerStatement.close();
             return actual;
         } catch (SQLException ex) {
@@ -196,5 +200,21 @@ public class RestauranteMain {
         }
         return null;
  }
+public static Camarero eliminarUser(Scanner sc, Connection conn){
+       
+        try {
+            System.out.println("Nombre");
+            String nombre=sc.nextLine();
+            System.out.println("Dni:");
+            String dni=sc.nextLine();
 
+            Statement registerStatement=conn.createStatement();
+            registerStatement.executeUpdate(
+                    "delete from camarero where dni='"+dni+"';");
+            registerStatement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return null;
+ }
 }

@@ -16,14 +16,16 @@ import java.time.LocalDate;
 public class Camarero {
     private String dni;
     private String nombre;
+   private String tipoDeCamarero;
+   
+   
 
-   private String TipoDeCamarero;
-
-    public Camarero(String dni, String nombre , String TipoDeCamarero) throws DniInvalidoException {
+    public Camarero(String dni, String nombre , String tipoDeCamarero) throws DniInvalidoException {
         setDni(dni);
         this.nombre = nombre;
-        this.TipoDeCamarero = TipoDeCamarero;
+        this.tipoDeCamarero = tipoDeCamarero;
     }
+
 
     public String getDni() {
         return dni;
@@ -48,11 +50,11 @@ public class Camarero {
    
 
     public String getTipoDeCamarero() {
-        return TipoDeCamarero;
+        return tipoDeCamarero;
     }
 
     public void setTipoDeCamarero(String TipoDeCamarero) {
-        this.TipoDeCamarero = TipoDeCamarero;
+        this.tipoDeCamarero = TipoDeCamarero;
     }
     
 }
