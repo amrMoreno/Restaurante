@@ -5,10 +5,16 @@
  */
 package clases;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  *
- * @author Adrian
+ * @author 1DAM
  */
-public class Comida extends Productos{
-    
+public class Restaurante {
+    private String nombre;
+    private String direccion;
+    private int numeroMesas;
+   
 }

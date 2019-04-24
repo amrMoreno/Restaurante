@@ -15,5 +15,6 @@ public class Mesa {
     private int numeroMesa;
     private Productos[] productosConsumidos;
     private LocalDateTime fecha;
-
+    private Camarero camarero;
+    
 }

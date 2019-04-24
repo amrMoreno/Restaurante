@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package excepciones;
 
 /**
  *
- * @author Adrian
+ * @author 1DAM
  */
-public class Bebida extends Productos{
+public class DniInvalidoException extends Exception {
+
+    public DniInvalidoException(String message) {
+        super(message);
+    }
+
+    
     
 }

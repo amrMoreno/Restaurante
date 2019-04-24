@@ -5,7 +5,9 @@
  */
 package restaurante;
 
-import java.awt.BorderLayout;
+import clases.Camarero;
+import excepciones.DniInvalidoException;
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Adrian Moreno Ruiz
  */
-public class Restaurante {
+public class RestauranteMain {
 
     /**
      * @param args the command line arguments
@@ -39,11 +41,12 @@ public class Restaurante {
                 + "\n\t0 - Cerar el programa "
                 + "\n\t1 - Entrantes"
                 + "\n\t2 - Comida "
-                + "\n\t3 -Postres"
-                + "\n\t4 -Refrescos"
-                + "\n\t5 -Copas"
-                + "\n\t6 -Licores"
-                + "\n\t7 -Vinos";
+                + "\n\t3 - Postres"
+                + "\n\t4 - Refrescos"
+                + "\n\t5 - Copas"
+                + "\n\t6 - Licores"
+                + "\n\t7 - Vinos"
+                + "\n\t8 - Registrar camarero";
 
         int action = 0;
         do {
@@ -140,6 +143,11 @@ public class Restaurante {
                         }
                         sttt.close();
                         break;
+                         case 8:
+                        System.out.println("Registra usuario");
+                             registerUser(sc, con);
+                        break;
+                        
                     default:
                         System.out.println("Opcion incorrecta");
 
@@ -155,8 +163,38 @@ public class Restaurante {
         try {
             con.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Restaurante.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public static Camarero registerUser(Scanner sc, Connection conn){
+       
+        try {
+            System.out.println("Nombre");
+            String nombre=sc.nextLine();
+            System.out.println("Dni:");
+            String dni=sc.nextLine();
+            System.out.println("Tipo de camarero");
+            String tipo=sc.nextLine();
+            
+            
+            
+            Camarero actual=new Camarero(dni, nombre,tipo);
+      
+            Statement registerStatement=conn.createStatement();
+            registerStatement.executeUpdate(
+                    "insert into camarero (dni,nombre,tipoDeCamarero"
+                            + ") values('"+nombre+"',"
+                                    + "'"+dni+"','"+
+                            "','"+tipo+"');");
+            registerStatement.close();
+            return actual;
+        } catch (SQLException ex) {
+            Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DniInvalidoException ex) {
+             Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
+            ex.getMessage();
+        }
+        return null;
+ }
 
 }

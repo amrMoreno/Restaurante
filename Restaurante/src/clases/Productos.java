@@ -14,8 +14,7 @@ public class Productos {
     private TipoPlato tipoDeProducto;
     private String precio;
     
-    
-    public enum TipoPlato{
+ public enum TipoPlato{
         ENTRANTE,
         MEDIO_ENTRANTE,
         COMIDA_PRINCIPAL,
@@ -24,5 +23,15 @@ public class Productos {
         LICORES,
         POSTRES,
     }
+
+    public Productos(String nombre, TipoPlato tipoDeProducto, String precio) {
+        this.nombre = nombre;
+        this.tipoDeProducto = tipoDeProducto;
+        this.precio = precio;
+    }
+   
+    
+    
+    
     
 }
