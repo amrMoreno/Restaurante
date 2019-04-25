@@ -36,7 +36,7 @@ public class RestauranteMain {
             System.exit(0);
         }
         Scanner sc = new Scanner(System.in);
-
+        
         String menu = "\n\n Elije una opcion :"
                 + "\n\t0 - Cerar el programa "
                 + "\n\t1 - Entrantes"
@@ -47,8 +47,8 @@ public class RestauranteMain {
                 + "\n\t6 - Licores"
                 + "\n\t7 - Vinos"
                 + "\n\t8 - Registrar camarero"
-                 + "\n\t9 - Eliminar camarero";
-
+                + "\n\t9 - Eliminar camarero";
+        
         int action = 0;
         do {
             try {
@@ -60,7 +60,7 @@ public class RestauranteMain {
                         break;
                     case 1:
                         System.out.println("Lista entrantes");
-
+                        
                         Statement stmte = con.createStatement();
                         ResultSet rst = stmte.executeQuery("SELECT * FROM comida WHERE tipo = 'ENTRANTES'");
                         while (rst.next()) {
@@ -72,7 +72,7 @@ public class RestauranteMain {
                         break;
                     case 2:
                         System.out.println("Lista de comidas");
-
+                        
                         Statement stmtem = con.createStatement();
                         ResultSet rstt = stmtem.executeQuery("SELECT * FROM comida WHERE tipo = 'COMIDA'");
                         while (rstt.next()) {
@@ -84,7 +84,7 @@ public class RestauranteMain {
                         break;
                     case 3:
                         System.out.println("Lista de postres");
-
+                        
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT * FROM comida WHERE tipo = 'POSTRE'");
                         while (rs.next()) {
@@ -96,7 +96,7 @@ public class RestauranteMain {
                         break;
                     case 4:
                         System.out.println("Lista refrescos");
-
+                        
                         Statement st = con.createStatement();
                         ResultSet r = st.executeQuery("SELECT * FROM bebida WHERE tipo = 'REFRESCO';");
                         while (r.next()) {
@@ -106,10 +106,10 @@ public class RestauranteMain {
                         }
                         st.close();
                         break;
-                        
+                    
                     case 5:
                         System.out.println("Lista de copas");
-
+                        
                         Statement stt = con.createStatement();
                         ResultSet resultadoC = stt.executeQuery("SELECT * FROM bebida WHERE tipo = 'COPA';");
                         while (resultadoC.next()) {
@@ -119,10 +119,10 @@ public class RestauranteMain {
                         }
                         stt.close();
                         break;
-                        
+                    
                     case 6:
                         System.out.println("Lista de licores");
-
+                        
                         Statement stm = con.createStatement();
                         ResultSet resultadoL = stm.executeQuery("SELECT * FROM bebida WHERE tipo = 'LICORES'");
                         while (resultadoL.next()) {
@@ -134,7 +134,7 @@ public class RestauranteMain {
                         break;
                     case 7:
                         System.out.println("Lista de vinos");
-
+                        
                         Statement sttt = con.createStatement();
                         ResultSet resultadoV = sttt.executeQuery("SELECT * FROM bebida WHERE tipo = 'VINO'");
                         while (resultadoV.next()) {
@@ -144,27 +144,27 @@ public class RestauranteMain {
                         }
                         sttt.close();
                         break;
-                         case 8:
+                    case 8:
                         System.out.println("Registra camarero");
-                             registerUser(sc, con);
-                             System.out.println("Camarero Registrado");
+                        registerUser(sc, con);
+                        System.out.println("Camarero Registrado");
                         break;
-                        case 9:
+                    case 9:
                         System.out.println("Eliminar  camarero");
-                            eliminarUser(sc, con);
-                             System.out.println("Camarero Eliminado");
+                        eliminarUser(sc, con);
+                        System.out.println("Camarero Eliminado");
                         break;
                     default:
                         System.out.println("Opcion incorrecta");
-
+                        
                         break;
                 }
-
+                
             } catch (SQLException ex) {
                 System.err.println("¡Tengo una excepción!");
                 System.err.println(ex.getMessage());
             }
-
+            
         } while (action != 0);
         try {
             con.close();
@@ -172,49 +172,61 @@ public class RestauranteMain {
             Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     public static Camarero registerUser(Scanner sc, Connection conn){
-       
+/**
+ * Registra un camarero  en la base de datos Mysql
+  @param sc Escaner para introducir datos
+ * @param conn Es la connecion con Mysql
+ * @return registra un camarero en la base de datos 
+ */
+    public static Camarero registerUser(Scanner sc, Connection conn) {
+        
         try {
             System.out.println("Nombre");
-            String nombre=sc.nextLine();
+            String nombre = sc.nextLine();
             System.out.println("Dni:");
-            String dni=sc.nextLine();
+            String dni = sc.nextLine();
             System.out.println("Tipo de camarero");
-            String tipoDeCamarero=sc.nextLine();
+            String tipoDeCamarero = sc.nextLine();
             
+            Camarero actual = new Camarero(dni, nombre, tipoDeCamarero);
             
-            
-            
-            Camarero actual=new Camarero(dni, nombre,tipoDeCamarero);
-      
-            Statement registerStatement=conn.createStatement();
+            Statement registerStatement = conn.createStatement();
             registerStatement.executeUpdate(
-                    "insert into camarero (dni,nombre,tipoDeCamarero) values('"+dni+"','"+nombre+"','"+tipoDeCamarero+"')");
+                    "insert into camarero (dni,nombre,tipoDeCamarero) values('" + dni + "','" + nombre + "','" + tipoDeCamarero + "')");
             registerStatement.close();
             return actual;
         } catch (SQLException ex) {
             Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DniInvalidoException ex) {
-             Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
             ex.getMessage();
         }
         return null;
- }
-public static Camarero eliminarUser(Scanner sc, Connection conn){
-       
+    }
+/**
+ * Funcion eliminar camarero,  con una doble comprobacion de dni por seguridad 
+ * @param sc Escaner para introducir datos
+ * @param conn Es la connecion con Mysql
+ * @return Elimina al camarero previamente introducido 
+ */
+    public static Camarero eliminarUser(Scanner sc, Connection conn) {
+        
         try {
             System.out.println("Nombre");
-            String nombre=sc.nextLine();
+            String nombre = sc.nextLine();
             System.out.println("Dni:");
-            String dni=sc.nextLine();
-
-            Statement registerStatement=conn.createStatement();
-            registerStatement.executeUpdate(
-                    "delete from camarero where dni='"+dni+"';");
-            registerStatement.close();
+            String dni = sc.nextLine();
+             System.out.println("Repide el Dni:");
+            String dni1 = sc.nextLine();
+            if (dni.equals(dni1)) {//Comprobacioón del dni por seguridad 
+                Statement registerStatement = conn.createStatement();
+                registerStatement.executeUpdate(
+                        "delete from camarero where dni=('" + dni + "');");
+                registerStatement.close();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(RestauranteMain.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }        
         return null;
- }
+    }
 }

@@ -15,4 +15,9 @@ public class Factura extends Mesa{
      private int numeroMesa;
     private Productos[] productosConsumidos;
     private LocalDateTime fecha;
+
+    public Factura(int numeroMesa, Productos[] productosConsumidos, LocalDateTime fecha, Camarero camarero) {
+        super(numeroMesa, productosConsumidos, fecha, camarero);
+    }
+    
 }
