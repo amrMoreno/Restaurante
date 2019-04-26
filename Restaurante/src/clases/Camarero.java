@@ -5,7 +5,6 @@
  */
 package clases;
 
-
 import excepciones.DniInvalidoException;
 import java.time.LocalDate;
 
@@ -14,25 +13,23 @@ import java.time.LocalDate;
  * @author 1DAM
  */
 public class Camarero {
+
     private String dni;
     private String nombre;
-   private String tipoDeCamarero;
-   
-   
+    private String tipoDeCamarero;
 
-    public Camarero(String dni, String nombre , String tipoDeCamarero) throws DniInvalidoException {
+    public Camarero(String dni, String nombre, String tipoDeCamarero) throws DniInvalidoException {
         setDni(dni);
         this.nombre = nombre;
         this.tipoDeCamarero = tipoDeCamarero;
     }
-
 
     public String getDni() {
         return dni;
     }
 
     public void setDni(String dni) throws DniInvalidoException {
-       if (dni.length() != 9) {
+        if (dni.length() != 9) {
             throw new DniInvalidoException("El DNI ha fallado");
         }
         this.dni = dni;
@@ -47,8 +44,6 @@ public class Camarero {
         this.nombre = nombre;
     }
 
-   
-
     public String getTipoDeCamarero() {
         return tipoDeCamarero;
     }
@@ -56,5 +51,5 @@ public class Camarero {
     public void setTipoDeCamarero(String TipoDeCamarero) {
         this.tipoDeCamarero = TipoDeCamarero;
     }
-    
+
 }
