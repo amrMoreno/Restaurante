@@ -2,5 +2,11 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="Restaurante/src"/>
+<<<<<<< HEAD
 	<classpathentry kind="output" path="bin"/>
+=======
+	<classpathentry kind="lib" path="Restaurante/dist/lib/mysql-connector-java-8.0.15.jar"/>
+	<classpathentry kind="lib" path="Restaurante/dist/Restaurante.jar"/>
+	<classpathentry kind="output" path="Restaurante/build/classes"/>
+>>>>>>> 475eccbd5342ad08b0d99ef85920475a2fae1344
 </classpath>
