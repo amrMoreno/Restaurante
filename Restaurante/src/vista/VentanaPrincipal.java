@@ -21,11 +21,13 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
 
 public class VentanaPrincipal extends JFrame{
 	private VentanaPrincipal menu;
 	private Salon salon;
 	private Terraza terraza;
+	private Mesa mesa;
 	
 	public VentanaPrincipal() {
 		this.menu=this;
@@ -88,11 +90,13 @@ public class VentanaPrincipal extends JFrame{
 		Menu.add(TerrazaM);
 		
 		
-		Label Titulo = new Label("Restaurante Cenec");
+		JLabel Titulo = new JLabel("Restaurante Cenec");
+		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
 		Titulo.setBounds(0, 10, 434, 33);
 		Menu.add(Titulo);
-		Titulo.setAlignment(Label.CENTER);
-		Titulo.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 20));
+		Titulo.setAlignmentY(Label.CENTER);
+		Titulo.setAlignmentX(Label.CENTER);
+		Titulo.setFont(new Font("Bauhaus 93", Font.PLAIN, 20));
 		
 		
 		
@@ -105,5 +109,8 @@ public class VentanaPrincipal extends JFrame{
 		gbc_label_1.gridy = 0;
 
 	}
+	
 
+		
+		
 }

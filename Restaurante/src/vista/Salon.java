@@ -15,8 +15,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Salon extends JPanel {
+	private Mesa mesa;
+	private VentanaPrincipal menu;
 
 	/**
 	 * Create the panel.
@@ -31,29 +35,41 @@ public class Salon extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton button = new JButton("1");
-		button.setBounds(48, 56, 55, 23);
-		panel.add(button);
+		JButton m1 = new JButton("1");
 		
-		JButton button_1 = new JButton("2");
-		button_1.setBounds(184, 56, 55, 23);
-		panel.add(button_1);
+		m1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//TODO 
+				mesa.cargarMesa(1);
 		
-		JButton button_2 = new JButton("3");
-		button_2.setBounds(310, 56, 62, 23);
-		panel.add(button_2);
 		
-		JButton button_3 = new JButton("4");
-		button_3.setBounds(48, 116, 55, 23);
-		panel.add(button_3);
+			
+					
+			}
+		});
+		m1.setBounds(48, 56, 55, 23);
+		panel.add(m1);
 		
-		JButton button_4 = new JButton("5");
-		button_4.setBounds(184, 116, 55, 23);
-		panel.add(button_4);
+		JButton m2 = new JButton("2");
+		m2.setBounds(184, 56, 55, 23);
+		panel.add(m2);
 		
-		JButton button_5 = new JButton("6");
-		button_5.setBounds(310, 116, 62, 23);
-		panel.add(button_5);
+		JButton m3 = new JButton("3");
+		m3.setBounds(310, 56, 62, 23);
+		panel.add(m3);
+		
+		JButton m4 = new JButton("4");
+		m4.setBounds(48, 116, 55, 23);
+		panel.add(m4);
+		
+		JButton m5 = new JButton("5");
+		m5.setBounds(184, 116, 55, 23);
+		panel.add(m5);
+		
+		JButton m6 = new JButton("6");
+		m6.setBounds(310, 116, 62, 23);
+		panel.add(m6);
 
 	}
 

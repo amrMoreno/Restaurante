@@ -10,6 +10,7 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 
 public class Camareros extends JFrame {
 
@@ -49,5 +50,7 @@ public class Camareros extends JFrame {
 		panel.setBackground(SystemColor.controlHighlight);
 		panel.setBounds(0, 11, 295, 140);
 		contentPane.add(panel);
+		panel.setLayout(new GridLayout(10, 0));
+		
 	}
 }

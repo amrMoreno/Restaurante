@@ -31,29 +31,29 @@ public class Terraza extends JPanel {
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton button = new JButton("1");
-		button.setBounds(48, 56, 55, 23);
-		panel.add(button);
+		JButton m7 = new JButton("7");
+		m7.setBounds(48, 56, 55, 23);
+		panel.add(m7);
 		
-		JButton button_1 = new JButton("2");
-		button_1.setBounds(184, 56, 55, 23);
-		panel.add(button_1);
+		JButton m8 = new JButton("8");
+		m8.setBounds(184, 56, 55, 23);
+		panel.add(m8);
 		
-		JButton button_2 = new JButton("3");
-		button_2.setBounds(310, 56, 62, 23);
-		panel.add(button_2);
+		JButton m9 = new JButton("9");
+		m9.setBounds(310, 56, 62, 23);
+		panel.add(m9);
 		
-		JButton button_3 = new JButton("4");
-		button_3.setBounds(48, 116, 55, 23);
-		panel.add(button_3);
+		JButton m10 = new JButton("10");
+		m10.setBounds(48, 116, 55, 23);
+		panel.add(m10);
 		
-		JButton button_4 = new JButton("5");
-		button_4.setBounds(184, 116, 55, 23);
-		panel.add(button_4);
+		JButton m11 = new JButton("11");
+		m11.setBounds(184, 116, 55, 23);
+		panel.add(m11);
 		
-		JButton button_5 = new JButton("6");
-		button_5.setBounds(310, 116, 62, 23);
-		panel.add(button_5);
+		JButton m12 = new JButton("12");
+		m12.setBounds(310, 116, 62, 23);
+		panel.add(m12);
 
 	}
 
