@@ -4,17 +4,22 @@ import javax.swing.JPanel;
 import java.awt.Panel;
 import java.awt.Color;
 import java.awt.Button;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class MainT extends JPanel {
+public class Terraza extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public MainT() {
+	public Terraza() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
@@ -22,24 +27,14 @@ public class MainT extends JPanel {
 		gridBagLayout.rowWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JPanel panel_1 = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.gridheight = 2;
-		gbc_panel_1.gridwidth = 12;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 0;
-		gbc_panel_1.gridy = 0;
-		add(panel_1, gbc_panel_1);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.CYAN);
+		JPanel panel = new JPanel();		
+		panel.setBackground(new Color(255, 255, 102));				
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.gridheight = 4;
+		gbc_panel.gridheight = 6;
 		gbc_panel.gridwidth = 12;
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 2;
+		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0, 51, 0};
@@ -49,6 +44,7 @@ public class MainT extends JPanel {
 		panel.setLayout(gbl_panel);
 		
 		JButton button = new JButton("1");
+		
 		GridBagConstraints gbc_button = new GridBagConstraints();
 		gbc_button.insets = new Insets(0, 0, 5, 5);
 		gbc_button.gridx = 0;

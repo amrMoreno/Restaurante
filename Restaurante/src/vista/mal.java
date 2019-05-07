@@ -20,11 +20,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 
-public class Menu extends JFrame {
+public class mal extends JFrame {
 
 	private JPanel contentPane;
-	private Menu menu;
-	private MainT terraza;
+	private mal menu;
+	private Terraza terraza;
 	 private JPanel panelSalon;
 	/**
 	 * Launch the application.
@@ -51,7 +51,7 @@ public class Menu extends JFrame {
 	 * @return 
 	 */
 
-	public Menu() {
+	public mal() {
 		this.menu=this;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1DAM\\Documents\\GitHub\\Restaurante\\Restaurante\\icono.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +59,7 @@ public class Menu extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		terraza=new MainT();
+		terraza=new Terraza();
 		terraza.setVisible(false);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{1, 0, 63, 0, 0, 0, 0};
@@ -68,28 +68,21 @@ public class Menu extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{1.0, 1.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		Label label_1 = new Label("Restaurante Cenec");
-		GridBagConstraints gbc_label_1 = new GridBagConstraints();
-		gbc_label_1.gridwidth = 7;
-		gbc_label_1.insets = new Insets(0, 0, 5, 0);
-		gbc_label_1.gridx = 0;
-		gbc_label_1.gridy = 0;
-		contentPane.add(label_1, gbc_label_1);
 		
-		Button button_6 = new Button("Salon");
-		button_6.addActionListener(new ActionListener() {
+		Button BotonSalon = new Button("Salon");
+		BotonSalon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				terraza.setVisible(false);
 		 		getContentPane().add(panelSalon);
 		 		panelSalon.setVisible(true);
 			}
 		});
-		button_6.setBackground(new Color(153, 204, 255));
+		BotonSalon.setBackground(new Color(255, 51, 51));
 		GridBagConstraints gbc_button_6 = new GridBagConstraints();
 		gbc_button_6.insets = new Insets(0, 0, 5, 5);
 		gbc_button_6.gridx = 0;
 		gbc_button_6.gridy = 1;
-		contentPane.add(button_6, gbc_button_6);
+		contentPane.add(BotonSalon, gbc_button_6);
 		 
 		 Button button_7 = new Button("Terraza");
 		 button_7.addActionListener(new ActionListener() {
@@ -99,7 +92,7 @@ public class Menu extends JFrame {
 		 		terraza.setVisible(true);
 		 	}
 		 });
-		 button_7.setBackground(Color.YELLOW);
+		 button_7.setBackground(new Color(255, 255, 102));
 		 GridBagConstraints gbc_button_7 = new GridBagConstraints();
 		 gbc_button_7.insets = new Insets(0, 0, 5, 5);
 		 gbc_button_7.gridx = 1;
@@ -107,7 +100,7 @@ public class Menu extends JFrame {
 		 contentPane.add(button_7, gbc_button_7);
 		
 		 panelSalon = new JPanel();
-		panelSalon.setBackground(Color.YELLOW);
+		panelSalon.setBackground(new Color(255, 51, 51));
 		GridBagConstraints gbc_panelSalon = new GridBagConstraints();
 		gbc_panelSalon.gridheight = 4;
 		gbc_panelSalon.gridwidth = 7;
