@@ -11,16 +11,16 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+import java.awt.FlowLayout;
 
 public class VentanaPrincipal extends JFrame{
 	private VentanaPrincipal menu;
@@ -32,27 +32,33 @@ public class VentanaPrincipal extends JFrame{
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1DAM\\Documents\\GitHub\\Restaurante\\Restaurante\\icono.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 344);
-		getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("434px"),},
-			new RowSpec[] {
-				RowSpec.decode("56px"),
-				RowSpec.decode("238px"),
-				RowSpec.decode("12px"),}));
+		getContentPane().setLayout(null);
+		
+		
+		
+		
+			
+		
+		
+		salon = new Salon();
+		salon.setBounds(0, 79, 434, 216);
+		getContentPane().add(salon);
+		salon.setLayout(null);
+		
+		
+		terraza =new Terraza();
+		terraza.setBounds(0, 79, 434, 216);
+		getContentPane().add(terraza);
+		terraza.setLayout(null);
 		
 		JPanel Menu = new JPanel();
-		getContentPane().add(Menu, "1, 1, fill, top");
-		Menu.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.GROWING_BUTTON_COLSPEC,
-				FormSpecs.RELATED_GAP_COLSPEC,
-				FormSpecs.GROWING_BUTTON_COLSPEC,
-				FormSpecs.GROWING_BUTTON_COLSPEC,},
-			new RowSpec[] {
-				FormSpecs.LINE_GAP_ROWSPEC,
-				RowSpec.decode("22px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,}));
+		Menu.setBounds(0, 0, 434, 80);
+		getContentPane().add(Menu);
+		Menu.setLayout(null);
 		
 		JButton TerrazaM = new JButton("Terraza");
+		TerrazaM.setBackground(new Color(255, 255, 153));
+		TerrazaM.setBounds(0, 49, 102, 23);
 		TerrazaM.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -62,13 +68,13 @@ public class VentanaPrincipal extends JFrame{
 		 		terraza.setVisible(true);
 			}
 		});
-		Menu.add(TerrazaM, "1, 2");
-		Label Titulo = new Label("Restaurante Cenec");
-		Titulo.setAlignment(Label.CENTER);
-		Titulo.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 20));
-		Menu.add(Titulo, "3, 2, 1, 3, left, top");
 		
 		JButton SalonM = new JButton("Salon");
+		SalonM.setBounds(112, 49, 102, 23);
+		SalonM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		SalonM.setBackground(new Color(255, 51, 51));
 		SalonM.addMouseListener(new MouseAdapter() {
 			@Override
@@ -78,16 +84,15 @@ public class VentanaPrincipal extends JFrame{
 		 		salon.setVisible(true);
 			}
 		});
-		Menu.add(SalonM, "1, 4");
+		Menu.add(SalonM);
+		Menu.add(TerrazaM);
 		
 		
-		
-		
-			
-		
-		
-		salon = new Salon();
-		getContentPane().add(salon, "1, 2, 1, 2, fill, fill");
+		Label Titulo = new Label("Restaurante Cenec");
+		Titulo.setBounds(0, 10, 434, 33);
+		Menu.add(Titulo);
+		Titulo.setAlignment(Label.CENTER);
+		Titulo.setFont(new Font("Bauhaus 93", Font.BOLD | Font.ITALIC, 20));
 		
 		
 		
