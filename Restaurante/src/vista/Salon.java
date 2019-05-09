@@ -11,6 +11,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.UIManager;
+
+import com.sun.glass.ui.Menu;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -20,7 +23,10 @@ import java.awt.event.MouseEvent;
 
 public class Salon extends JPanel {
 	private Mesa mesa;
-	private VentanaPrincipal menu;
+
+	private Salon salon;
+	private Terraza terraza;
+	private VentanaPrincipal inicio;
 
 	/**
 	 * Create the panel.
@@ -36,16 +42,11 @@ public class Salon extends JPanel {
 		panel.setLayout(null);
 		
 		JButton m1 = new JButton("1");
-		
 		m1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//TODO 
-				mesa.cargarMesa(1);
+				
 		
-		
-			
-					
 			}
 		});
 		m1.setBounds(48, 56, 55, 23);
@@ -72,5 +73,4 @@ public class Salon extends JPanel {
 		panel.add(m6);
 
 	}
-
-}
+	}

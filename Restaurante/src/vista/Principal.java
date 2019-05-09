@@ -19,12 +19,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-public class Mesa extends JPanel {
+public class Principal extends JPanel {
 	private VentanaPrincipal menu;
-	private Mesa mesa;
+	private Principal mesa;
 
 	
-	public Mesa() {
+	public Principal() {
 		super();
 		setBorder(UIManager.getBorder("Button.border"));
 		setLayout(null);
@@ -126,9 +126,9 @@ public class Mesa extends JPanel {
 	
 	public void cargarMesa () {
 		
-		Mesa nMesa = null;
+		Principal nMesa = null;
 		if(mesa==null) {
-			nMesa=new Mesa();
+			nMesa=new Principal();
 		nMesa.setVisible(true);
 		}else {
 			nMesa.setVisible(true);

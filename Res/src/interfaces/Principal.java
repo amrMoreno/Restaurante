@@ -1,31 +1,23 @@
-package vista;
+package interfaces;
 
-import javax.swing.JPanel;
-
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
-import javax.swing.JLabel;
-import javax.swing.border.BevelBorder;
-import javax.swing.UIManager;
-import javax.swing.border.CompoundBorder;
-
-import com.sun.glass.ui.Menu;
-
 import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class Mesa extends JPanel {
-	private VentanaPrincipal menu;
-	private Mesa mesa;
-
+public class Principal extends JPanel{
+	private Ventana ventana;
 	
-	public Mesa() {
+	public Principal(Ventana v) {
 		super();
+		this.ventana=v;
 		setBorder(UIManager.getBorder("Button.border"));
 		setLayout(null);
 		
@@ -78,8 +70,14 @@ public class Mesa extends JPanel {
 		menu2.add(BImprimir);
 		
 		JButton BPendiente = new JButton("Pendiente");
+		BPendiente.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.cargaPantallaInicio();
+			}
+		});
 		BPendiente.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
-		BPendiente.setBackground(new Color(0, 51, 255));
+		BPendiente.setBackground(new Color(135, 206, 250));
 		menu2.add(BPendiente);
 		
 		
@@ -122,18 +120,7 @@ public class Mesa extends JPanel {
 		articulos.setBorder(UIManager.getBorder("CheckBox.border"));
 		articulos.setBounds(127, 32, 238, 221);
 		add(articulos);
-	}
-	
-	public void cargarMesa () {
 		
-		Mesa nMesa = null;
-		if(mesa==null) {
-			nMesa=new Mesa();
-		nMesa.setVisible(true);
-		}else {
-			nMesa.setVisible(true);
-		}
-	menu.setVisible(false);
-			
 	}
+
 }
