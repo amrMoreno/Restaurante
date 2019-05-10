@@ -15,7 +15,8 @@ import java.awt.event.MouseEvent;
 public class Principal extends JPanel{
 	private Ventana ventana;
 	
-	public Principal(Ventana v) {
+	public Principal(Ventana v ) {
+	
 		super();
 		this.ventana=v;
 		setBorder(UIManager.getBorder("Button.border"));

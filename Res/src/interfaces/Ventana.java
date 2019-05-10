@@ -1,6 +1,9 @@
 package interfaces;
 
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,20 +14,20 @@ public class Ventana extends JFrame{
 	private Salon pantallaSalon;
 	private Terraza pantallaTerraza;
 	private Camareros camarero;
+
 	
 	
 	public Ventana() {
 		super();
 		this.setTitle("Restaurante Cenec");
 		pantallaInicio=new PantallaInicio(this);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1DAM\\Documents\\GitHub\\Restaurante\\Restaurante\\icono.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1DAM\\Documents\\GitHub\\Restaurante\\icon1.jpg"
+	));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(465,330);
 		this.setContentPane(pantallaInicio);
-		
-		
-		
 		setVisible(true);
+		
 	}
 
 	public void cargaPantallaInicio() {
@@ -46,6 +49,7 @@ public class Ventana extends JFrame{
 		
 }
 	public void cargaPrincipal(int n) {
+		
 		if(mesa==null) {
 			mesa=new Principal(this);
 			camarero=new Camareros(this);
