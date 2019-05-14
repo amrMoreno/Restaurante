@@ -1,10 +1,14 @@
 package interfaces;
 
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -21,12 +25,17 @@ public class Ventana extends JFrame{
 		super();
 		this.setTitle("Restaurante Cenec");
 		pantallaInicio=new PantallaInicio(this);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\1DAM\\Documents\\GitHub\\Restaurante\\icon1.jpg"
-	));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(465,330);
 		this.setContentPane(pantallaInicio);
 		setVisible(true);
+		try {
+			this.setIconImage(ImageIO.read(new File("./icon.png")));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
