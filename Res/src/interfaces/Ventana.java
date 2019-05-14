@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Ventana extends JFrame{
 	private PantallaInicio pantallaInicio;
-	private Principal mesa;
+	private Principal[] mesa;
 	private Salon pantallaSalon;
 	private Terraza pantallaTerraza;
 	private Camareros camarero;
@@ -30,6 +30,7 @@ public class Ventana extends JFrame{
 		setSize(465,330);
 		this.setContentPane(pantallaInicio);
 		setVisible(true);
+		this.setLocation(400,200);
 		try {
 			this.setIconImage(ImageIO.read(new File("./icon.png")));
 		} catch (IOException e) {
@@ -47,7 +48,9 @@ public class Ventana extends JFrame{
 		this.setTitle("Restaurante cenec");
 		
 		if(this.mesa!=null) {
-			this.mesa.setVisible(false);
+			for (int i = 0; i < mesa.length; i++) {
+				this.mesa[i].setVisible(false);
+			}
 		}/*
 		if(this.pantallaRegistro!=null) {
 			this.pantallaRegistro.setVisible(false);
@@ -60,15 +63,18 @@ public class Ventana extends JFrame{
 	public void cargaPrincipal(int n) {
 		
 		if(mesa==null) {
-			mesa=new Principal(this);
+			mesa=new Principal[7];
+			for (int i = 0; i < mesa.length; i++) {
+				mesa[i]=new Principal(this);
+			}
 			camarero=new Camareros(this);
 			/*this.camarero.setVisible(true);
 		 camarero.setSize(450,200);*/
 		}	
 		this.setTitle("Mesa"+ n);
 		this.pantallaInicio.setVisible(false);
-		this.mesa.setVisible(true);
-		this.setContentPane(this.mesa);
+		this.mesa[n].setVisible(true);
+		setContentPane(this.mesa[n]);
 		
 	}
 		

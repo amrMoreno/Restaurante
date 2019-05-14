@@ -14,10 +14,12 @@ import java.awt.event.MouseEvent;
 
 public class Principal extends JPanel{
 	private Ventana ventana;
+	private Principal thisRef;
 	
 	public Principal(Ventana v ) {
 	
 		super();
+		thisRef=this;
 		this.ventana=v;
 		setBorder(UIManager.getBorder("Button.border"));
 		setLayout(null);
@@ -89,6 +91,7 @@ public class Principal extends JPanel{
 		add(menu1);
 		
 		JButton BBebidas = new JButton("Bebidas");
+		
 		BBebidas.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 13));
 		menu1.add(BBebidas);
 		
@@ -117,10 +120,27 @@ public class Principal extends JPanel{
 		menu1.add(BVinos);
 		
 		JPanel articulos = new JPanel();
-		articulos.setBackground(Color.WHITE);
+		articulos.setBackground(Color.PINK);
 		articulos.setBorder(UIManager.getBorder("CheckBox.border"));
 		articulos.setBounds(127, 32, 238, 221);
 		add(articulos);
+		articulos.setLayout(new GridLayout(2, 2, 0, 0));
+		
+		BBebidas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				articulos.removeAll();
+				//Leer bebidas de base de datos
+				for (int i = 0; i < 5; i++) {
+					JButton producto=new JButton("producto "+i);
+					articulos.add(producto);
+				}
+				articulos.setVisible(false);
+				articulos.setVisible(true);
+				
+				
+			}
+		});
 		
 	}
 
