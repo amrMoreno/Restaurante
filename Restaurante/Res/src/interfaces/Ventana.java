@@ -18,6 +18,7 @@ public class Ventana extends JFrame{
 	private Salon pantallaSalon;
 	private Terraza pantallaTerraza;
 	private Camareros camarero;
+	public Connection connection;
 
 	
 	
@@ -76,6 +77,27 @@ public class Ventana extends JFrame{
 		this.mesa[n].setVisible(true);
 		setContentPane(this.mesa[n]);
 		
+	}
+	public Connection  cargaBd () {
+		
+	        try {
+	        	 connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/restaurante?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
+	        	//setConnection(DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/restaurante?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", ""));
+	        	   return connection;
+	        } catch (SQLException ex) {
+	            System.err.println("Imposible conectar");
+	            ex.printStackTrace();
+	            System.exit(0);
+	        }
+	        return connection;
+	}
+
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 		
 	

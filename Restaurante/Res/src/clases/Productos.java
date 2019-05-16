@@ -22,6 +22,7 @@ public class Productos {
         VINOS,
         LICORES,
         POSTRES,
+        COPAS
     }
 
     public Productos(String nombre, TipoProducto tipoDeProducto, String precio) {
