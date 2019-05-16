@@ -64,7 +64,7 @@ public class Ventana extends JFrame{
 	public void cargaPrincipal(int n) {
 		
 		if(mesa==null) {
-			mesa=new Principal[7];
+			mesa=new Principal[8];
 			for (int i = 0; i < mesa.length; i++) {
 				mesa[i]=new Principal(this);
 			}
