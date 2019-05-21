@@ -12,7 +12,7 @@ package clases;
 public class Productos {
     private String nombre;
     private TipoProducto tipoDeProducto;
-    private String precio;
+    private float precio;
     
  public enum TipoProducto{
         ENTRANTE,
@@ -25,7 +25,7 @@ public class Productos {
         COPAS
     }
 
-    public Productos(String nombre, TipoProducto tipoDeProducto, String precio) {
+    public Productos(String nombre, TipoProducto tipoDeProducto, float precio) {
         this.nombre = nombre;
         this.tipoDeProducto = tipoDeProducto;
         this.precio = precio;
@@ -83,11 +83,11 @@ public class Productos {
         this.tipoDeProducto = tipoDeProducto;
     }
 
-    public String getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
    

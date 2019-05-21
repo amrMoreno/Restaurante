@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import clases.Mesa;
 import clases.Productos;
 import clases.Productos.TipoProducto;
 
@@ -25,10 +26,14 @@ public class Principal extends JPanel {
 	private Principal thisRef;
 	private Connection c;
 	private Statement stmte;
-
-	public Principal(Ventana v) {
+	private Mesa mesa;
+	private JPanel lista;
+	private JLabel labelTotal;
+	
+	public Principal(Ventana v,Mesa m) {
 
 		super();
+		mesa=m;
 		thisRef = this;
 		this.ventana = v;
 		this.c = ventana.cargaBd();
@@ -44,20 +49,11 @@ public class Principal extends JPanel {
 		panel.add(lblRestauranteCenec);
 		lblRestauranteCenec.setFont(new Font("Bauhaus 93", Font.PLAIN, 20));
 
-		JPanel lista = new JPanel();
+		lista = new JPanel();
 		lista.setBorder(UIManager.getBorder("CheckBox.border"));
-		lista.setBounds(0, 32, 127, 221);
+		lista.setBounds(0, 56, 127, 197);
 		add(lista);
 		lista.setLayout(null);
-
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(51, 255, 204));
-		panel_3.setBounds(0, 0, 127, 25);
-		lista.add(panel_3);
-
-		JLabel lblListaConsumo = new JLabel("Lista Consumo");
-		lblListaConsumo.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
-		panel_3.add(lblListaConsumo);
 
 		JPanel total = new JPanel();
 		total.setBorder(UIManager.getBorder("CheckBox.border"));
@@ -67,6 +63,9 @@ public class Principal extends JPanel {
 		JLabel lblTotal = new JLabel("Total: ");
 		lblTotal.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
 		total.add(lblTotal);
+		
+		 labelTotal = new JLabel("0");
+		total.add(labelTotal);
 
 		JPanel menu2 = new JPanel();
 		menu2.setBorder(UIManager.getBorder("CheckBox.border"));
@@ -139,6 +138,12 @@ public class Principal extends JPanel {
 		articulos.setBounds(127, 32, 238, 221);
 		add(articulos);
 		articulos.setLayout(new GridLayout(2, 2, 0, 0));
+		
+				JLabel lblListaConsumo = new JLabel("Lista Consumo");
+				lblListaConsumo.setBackground(new Color(50, 205, 50));
+				lblListaConsumo.setBounds(0, 32, 127, 20);
+				add(lblListaConsumo);
+				lblListaConsumo.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
 
 		BBebidas.addMouseListener(new MouseAdapter() {
 			@Override
@@ -151,11 +156,20 @@ public class Principal extends JPanel {
 						ResultSet rst = stmte.executeQuery("SELECT * FROM bebida WHERE tipo = 'REFRESCO'");
 
 						while (rst.next()) {
-							Productos Bebida = new Productos(rst.getString("nombre"), TipoProducto.REFRESCO,
-									rst.getString("precio"));
-							JButton producto = new JButton(Bebida.getNombre());
+							Productos bebida = new Productos(rst.getString("nombre"), TipoProducto.REFRESCO,
+									rst.getFloat("precio"));
+							JButton producto = new JButton(bebida.getNombre());
 							producto.setFont(new Font("Agency FB", Font.ITALIC, 12));
 							articulos.add(producto);
+							producto.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(bebida);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -180,9 +194,18 @@ public class Principal extends JPanel {
 
 						while (rst.next()) {
 							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.COMIDA_PRINCIPAL,
-									rst.getString("precio"));
+									rst.getFloat("precio"));
 							JButton producto = new JButton(comida.getNombre());
-							articulos.add(producto);
+							articulos.add(producto);	
+							producto.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(comida);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -205,10 +228,20 @@ public class Principal extends JPanel {
 						ResultSet rst = stmte.executeQuery("SELECT * FROM bebida WHERE tipo = 'COPA'");
 
 						while (rst.next()) {
-							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.COPAS,
-									rst.getString("precio"));
-							JButton copa = new JButton(comida.getNombre());
-							articulos.add(copa);
+							Productos copa = new Productos(rst.getString("nombre"), TipoProducto.COPAS,
+									rst.getFloat("precio"));
+							JButton productos = new JButton(copa.getNombre());
+							articulos.add(copa);	
+							
+							productos.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(copa);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -221,6 +254,7 @@ public class Principal extends JPanel {
 			}
 
 		});
+		
 
 		BEntrantes.addMouseListener(new MouseAdapter() {
 			@Override
@@ -235,9 +269,18 @@ public class Principal extends JPanel {
 
 						while (rst.next()) {
 							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.ENTRANTE,
-									rst.getString("precio"));
+									rst.getFloat("precio"));
 							JButton entrantes = new JButton(comida.getNombre());
 							articulos.add(entrantes);
+							entrantes.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(comida);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -261,9 +304,18 @@ public class Principal extends JPanel {
 
 						while (rst.next()) {
 							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.LICORES,
-									rst.getString("precio"));
+									rst.getFloat("precio"));
 							JButton licor = new JButton(comida.getNombre());
-							articulos.add(licor);
+							articulos.add(licor);	
+							licor.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(comida);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -300,9 +352,18 @@ public class Principal extends JPanel {
 
 						while (rst.next()) {
 							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.VINOS,
-									rst.getString("precio"));
+									rst.getFloat("precio"));
 							JButton vino = new JButton(comida.getNombre());
-							articulos.add(vino);
+							articulos.add(vino);	
+							vino.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(comida);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -327,9 +388,18 @@ public class Principal extends JPanel {
 
 						while (rst.next()) {
 							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.POSTRES,
-									rst.getString("precio"));
+									rst.getFloat("precio"));
 							JButton postres = new JButton(comida.getNombre());
 							articulos.add(postres);
+							postres.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(comida);
+									repintarListaProductos();
+								}
+								
+							});
 						}
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -343,5 +413,21 @@ public class Principal extends JPanel {
 		});
 
 	}
-
+	
+	public void repintarListaProductos() {
+		lista.removeAll();
+		System.out.println(lista.getComponentCount());
+		lista.setLayout(new GridLayout(mesa.getProductosConsumidos().size(),1));
+		float total=0;
+		for(int i=0;i<mesa.getProductosConsumidos().size();i++) {
+			
+			System.out.println();
+			lista.add(new JLabel(mesa.getProductosConsumidos().get(i).getNombre()));
+			total+=mesa.getProductosConsumidos().get(i).getPrecio();
+		}
+		labelTotal.setText(total+"");
+		lista.setVisible(false);
+	
+		lista.setVisible(true);
+	}
 }

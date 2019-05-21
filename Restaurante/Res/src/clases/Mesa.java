@@ -6,6 +6,7 @@
 package clases;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,11 +14,11 @@ import java.time.LocalDateTime;
  */
 public class Mesa {
     private int numeroMesa;
-    private Productos[] productosConsumidos;
+    private ArrayList<Productos> productosConsumidos;
     private LocalDateTime fecha;
     private Camarero camarero;
 
-    public Mesa(int numeroMesa, Productos[] productosConsumidos, LocalDateTime fecha, Camarero camarero) {
+    public Mesa(int numeroMesa,ArrayList<Productos> productosConsumidos, LocalDateTime fecha, Camarero camarero) {
         this.numeroMesa = numeroMesa;
         this.productosConsumidos = productosConsumidos;
         this.fecha = fecha;
@@ -32,11 +33,11 @@ public class Mesa {
         this.numeroMesa = numeroMesa;
     }
 
-    public Productos[] getProductosConsumidos() {
+    public ArrayList<Productos> getProductosConsumidos() {
         return productosConsumidos;
     }
 
-    public void setProductosConsumidos(Productos[] productosConsumidos) {
+    public void setProductosConsumidos(ArrayList<Productos> productosConsumidos) {
         this.productosConsumidos = productosConsumidos;
     }
 
