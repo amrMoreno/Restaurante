@@ -1,0 +1,15 @@
+RESTAURANTE CENEC
+
+
+   El numero de mesa es:  1
+
+   La fecha es :    2019-05-24T14:01:12.068
+
+   ---------------
+0 |Cerveza  2.0
+1 |Cerveza  2.0
+2 |Callos  10.0
+3 |Callos  10.0
+4 |ChuletonTernera  20.0
+5 |ChuletonTernera  20.0
+---------------                64.0€

@@ -3,7 +3,9 @@ package interfaces;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -31,6 +33,7 @@ public class Ventana extends JFrame{
 	private Terraza pantallaTerraza;
 	private Camareros camarero;
 	public Connection connection;
+	private Mesa mesa;
 
 	
 	
@@ -99,6 +102,10 @@ public class Ventana extends JFrame{
 		setContentPane(this.pantallasPrincipal.get(n-1));
 		
 	}
+	/**
+	 * Funcion que carga la base de dato para conectrase a ella
+	 * @return
+	 */
 	public Connection  cargaBd () {
 		
 	        try {
@@ -120,6 +127,7 @@ public class Ventana extends JFrame{
 	public void setConnection(Connection connection) {
 		this.connection = connection;
 	}
+	
 		
 	
 }
