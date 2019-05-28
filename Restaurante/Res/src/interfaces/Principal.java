@@ -343,16 +343,38 @@ public class Principal extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				articulos.removeAll();
-				// Leer bebidas de base de datos
-				for (int i = 0; i < 5; i++) {
-					JButton producto = new JButton("producto " + i);
-					articulos.add(producto);
+
+				if (Productos.TipoProducto.MEDIO_ENTRANTE != null) {
+					try {
+						stmte = c.createStatement();
+						ResultSet rst = stmte.executeQuery("SELECT * FROM productos WHERE tipoDeProducto = ' MEDIO_ENTRANTE'");
+
+						while (rst.next()) {
+							Productos comida = new Productos(rst.getString("nombre"), TipoProducto.MEDIO_ENTRANTE,
+									rst.getFloat("precio"));
+							JButton entrantes = new JButton(comida.getNombre());
+							articulos.add(entrantes);
+							entrantes.addMouseListener(new MouseAdapter() {
+
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+									mesa.getProductosConsumidos().add(comida);
+									repintarListaProductos();
+								}
+								
+							});
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+
 				}
 				articulos.setVisible(false);
 				articulos.setVisible(true);
 
 			}
 		});
+
 		BVinos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -447,6 +469,10 @@ public class Principal extends JPanel {
 	 * Imprime en un Fichero .TXT la factura total 
 	 * @param a numero de la mesa pasado por parametros
 	 */
+	public void cobrar() {
+		
+		
+	}
 	public void factura(int a) {
 		FileWriter fichero = null;
         PrintWriter pw = null;
