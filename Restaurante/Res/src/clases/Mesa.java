@@ -5,25 +5,52 @@
  */
 package clases;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import interfaces.Ventana;
 
 /**
  *
  * @author 1DAM
  */
-public class Mesa {
+public class Mesa extends JButton {
     private int numeroMesa;
     private ArrayList<Productos> productosConsumidos;
     private LocalDateTime fecha;
     private Camarero camarero;
+    private Ventana ventana;
+    
 
-    public Mesa(int numeroMesa,ArrayList<Productos> productosConsumidos, LocalDateTime fecha, Camarero camarero) {
-        this.numeroMesa = numeroMesa;
+    public Mesa(Ventana v,int numeroMesa,ArrayList<Productos> productosConsumidos, LocalDateTime fecha, Camarero camarero) {
+    	this.ventana=v;
+    	setIcon(new ImageIcon("./table"+numeroMesa+"n.png"));
+    	this.numeroMesa = numeroMesa;
         this.productosConsumidos = productosConsumidos;
         this.fecha = fecha;
         this.camarero = camarero;
+        this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ventana.cargaPrincipal(numeroMesa);
+				if(getProductosConsumidos()!=null) {
+					setIcon(new ImageIcon("./table"+numeroMesa+"r.png"));
+				}
+				
+			}
+		});
     }
+    
+    public void setLibre() {
+    	setIcon(new ImageIcon("./table"+numeroMesa+"n.png"));
+    }
+    
+    
 
     public int getNumeroMesa() {
         return numeroMesa;

@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class PantallaInicio  extends JPanel{
 	private Ventana ventana;
@@ -18,43 +19,26 @@ public class PantallaInicio  extends JPanel{
 	
 	public PantallaInicio(Ventana v) {
 		super();
+		setBackground(new Color(0, 255, 255));
 		this.ventana=v;
 		
 		setLayout(null);
 		
 		JLabel Titulo = new JLabel("Restaurante Cenec");
+		Titulo.setBackground(new Color(0, 0, 0));
+		Titulo.setForeground(new Color(0, 0, 0));
 		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
-		Titulo.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 24));
-		Titulo.setBounds(10, 11, 430, 22);
+		Titulo.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 32));
+		Titulo.setBounds(10, 7, 430, 50);
 		add(Titulo);
-		pantallaSalon=new Salon(ventana);
+		pantallaSalon=new SalonTerraza(ventana);
 		add(pantallaSalon);
-		pantallaTerraza=new Terraza(ventana);
-		add(pantallaTerraza);
 		
-		JButton btnSalon = new JButton("Salon");
-		btnSalon.setBackground(new Color(250, 235, 215));
-		btnSalon.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			cargaSalon();
-			}
-		});
-		btnSalon.setBounds(10, 38, 89, 23);
-		add(btnSalon);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("./Sin t\u00EDtulo.png"));
+		lblNewLabel.setBounds(0, 0, 138, 76);
+		add(lblNewLabel);
 		
-		JButton btnTerraza = new JButton("Terraza");
-		btnTerraza.setBackground(new Color(255, 255, 153));
-		btnTerraza.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-			cargaTerraza();
-			}
-		});
-		btnTerraza.setBounds(109, 38, 89, 23);
-		add(btnTerraza);
-		
-	
 	}
 public void cargaSalon() {
 		

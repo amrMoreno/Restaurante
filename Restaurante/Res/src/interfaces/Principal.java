@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,7 +30,7 @@ public class Principal extends JPanel {
 	private Principal thisRef;
 	private Connection c;
 	private Statement stmte;
-	private Mesa mesa;
+	protected  Mesa mesa;
 	private JPanel lista;
 	private JLabel labelTotal;
 	
@@ -81,6 +82,12 @@ public class Principal extends JPanel {
 		menu2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JButton BCobrar = new JButton("Cobrar");
+		BCobrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cobrar();
+			}
+		});
 		BCobrar.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
 		BCobrar.setBackground(new Color(102, 204, 0));
 		menu2.add(BCobrar);
@@ -146,11 +153,25 @@ public class Principal extends JPanel {
 		menu1.add(BPostres);
 
 		JPanel articulos = new JPanel();
+		articulos.setOpaque(false);
+		
 		articulos.setBackground(Color.WHITE);
 		articulos.setBorder(UIManager.getBorder("CheckBox.border"));
 		articulos.setBounds(127, 32, 238, 221);
 		add(articulos);
 		articulos.setLayout(new GridLayout(2, 2, 0, 0));
+				
+				JPanel imagen = new JPanel();
+				imagen.setBorder(UIManager.getBorder("CheckBox.border"));
+				imagen.setBounds(127, 32, 238, 221);
+				add(imagen);
+				imagen.setLayout(null);
+				
+				JLabel lblNewLabel = new JLabel("");
+				lblNewLabel.setIcon(new ImageIcon("./Sin t\u00EDtulo.png"));
+				lblNewLabel.setBounds(60, 54, 178, 132);
+				imagen.add(lblNewLabel);
+			
 		
 				JLabel lblListaConsumo = new JLabel("Lista Consumo");
 				lblListaConsumo.setBackground(new Color(50, 205, 50));
@@ -465,15 +486,19 @@ public class Principal extends JPanel {
 	
 		lista.setVisible(true);
 	}
+	
+	public void cobrar() {
+		mesa.setLibre();
+	}
 	/**
 	 * Imprime en un Fichero .TXT la factura total 
 	 * @param a numero de la mesa pasado por parametros
 	 */
-	public void cobrar() {
-		
-		
-	}
 	public void factura(int a) {
+		if(mesa.getCamarero()==null) {
+			Camareros c=new Camareros(mesa);
+			c.setVisible(true);
+		}
 		FileWriter fichero = null;
         PrintWriter pw = null;
         float total= 0;
@@ -485,12 +510,12 @@ public class Principal extends JPanel {
             
             pw.println("RESTAURANTE CENEC");
             pw.println();
-            pw.println();
+            pw.println("__________________________");
             pw.println("   El numero de mesa es:  "+mesa.getNumeroMesa());
-            pw.println();
+            pw.println("|                            |");
             pw.println("   La fecha es :    "+mesa.getFecha());
-            pw.println();
-            	pw.println("   ---------------");
+            pw.println("|                            |");
+            pw.println("__________________________");
             for (int i = 0; i < mesa.getProductosConsumidos().size(); i++) {
             	     pw.println(i+" |"+mesa.getProductosConsumidos().get(i).getNombre()+"  "+mesa.getProductosConsumidos().get(i).getPrecio());
             	     total+=mesa.getProductosConsumidos().get(i).getPrecio();

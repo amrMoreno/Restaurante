@@ -23,33 +23,35 @@ import clases.Productos;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class Ventana extends JFrame{
 	private PantallaInicio pantallaInicio;
 	private HashMap<Integer,Mesa> mesas;
 	private ArrayList<Principal> pantallasPrincipal;
-	private ArrayList<Camarero> camareros;
-	private Salon pantallaSalon;
-	private Terraza pantallaTerraza;
-	private Camareros camarero;
-	public Connection connection;
-	private Mesa mesa;
+	public static Connection connection;
 
 	
 	
+	public HashMap<Integer, Mesa> getMesas() {
+		return mesas;
+	}
+
 	public Ventana() {
 		super();
 		this.setTitle("Restaurante Cenec");
 		//inicializar todos los camareros
 		this.mesas=new HashMap<Integer,Mesa>();
-		this.mesas.put(1, new Mesa(1,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
-		this.mesas.put(2, new Mesa(2,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
-		this.mesas.put(3, new Mesa(3,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
-		this.mesas.put(4, new Mesa(4,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
-		this.mesas.put(5, new Mesa(5,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
-		this.mesas.put(6, new Mesa(6,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
-		this.mesas.put(7, new Mesa(7,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(1, new Mesa(this,1,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(2, new Mesa(this,2,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(3, new Mesa(this,3,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(4, new Mesa(this,4,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(5, new Mesa(this,5,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(6, new Mesa(this,6,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
+		this.mesas.put(7, new Mesa(this,7,new ArrayList<Productos>(),LocalDateTime.now(),null/*coger a un camarero del arrayLis*/));
 		pantallaInicio=new PantallaInicio(this);
+		pantallaInicio.setBackground(new Color(245, 245, 220));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(465,330);
@@ -86,6 +88,9 @@ public class Ventana extends JFrame{
 	
 		
 }
+	
+	
+	
 	public void cargaPrincipal(int n) {
 
 		if(this.pantallasPrincipal==null) {
@@ -102,11 +107,13 @@ public class Ventana extends JFrame{
 		setContentPane(this.pantallasPrincipal.get(n-1));
 		
 	}
+	
+	
 	/**
 	 * Funcion que carga la base de dato para conectrase a ella
 	 * @return
 	 */
-	public Connection  cargaBd () {
+	public static Connection  cargaBd () {
 		
 	        try {
 	        	 connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/restaurante?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "");
@@ -120,12 +127,17 @@ public class Ventana extends JFrame{
 	        return connection;
 	}
 
-	public Connection getConnection() {
+	public static Connection getConnection() {
 		return connection;
 	}
 
-	public void setConnection(Connection connection) {
-		this.connection = connection;
+	public static void desconectar() {
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 		
