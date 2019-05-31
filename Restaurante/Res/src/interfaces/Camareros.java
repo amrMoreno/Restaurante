@@ -28,6 +28,8 @@ import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Camareros extends JDialog {
 	private JDialog thisRef;
@@ -41,7 +43,7 @@ public class Camareros extends JDialog {
 		setTitle("Camareros");
 		setLocation(400,300);
 		 contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.controlHighlight);
+		contentPane.setBackground(new Color(220, 220, 220));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -52,7 +54,7 @@ public class Camareros extends JDialog {
 			public void mouseClicked(MouseEvent arg0) {
 				RegistroCamarero rc=new RegistroCamarero();
 				rc.setVisible(true);
-			
+				
 			}
 		});
 		btnRegistrar.setBounds(305, 83, 119, 23);
@@ -62,6 +64,7 @@ public class Camareros extends JDialog {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+			
 				thisRef.setVisible(false);
 			}
 		});
@@ -73,6 +76,12 @@ public class Camareros extends JDialog {
 		panel.setBounds(0, 11, 295, 140);
 		contentPane.add(panel);
 		panel.setLayout(new GridLayout(10, 0));
+		
+		JLabel Camarero = new JLabel("");
+		Camarero.setBackground(new Color(220, 220, 220));
+		Camarero.setIcon(new ImageIcon("./camareroR.png"));
+		Camarero.setBounds(332, 11, 75, 61);
+		contentPane.add(Camarero);
 		
 		
 		try {
@@ -91,7 +100,10 @@ public class Camareros extends JDialog {
 
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
+						
 						mesa.setCamarero(camarero);
+						thisRef.setVisible(false);
+						mesa.factura(mesa.getNumeroMesa());
 					}
 					
 				});

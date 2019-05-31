@@ -16,15 +16,18 @@ public class PantallaInicio  extends JPanel{
 	private Ventana ventana;
 	private JPanel pantallaSalon;
 	private JPanel pantallaTerraza;
-	
+	/**
+	 * Contructor de la clase pantalla inicio
+	 */
 	public PantallaInicio(Ventana v) {
 		super();
-		setBackground(new Color(0, 255, 255));
+		setBackground(new Color(192, 192, 192));
 		this.ventana=v;
-		
 		setLayout(null);
 		
-		JLabel Titulo = new JLabel("Restaurante Cenec");
+		
+		
+		JLabel Titulo = new JLabel("  Restaurante Cenec");
 		Titulo.setBackground(new Color(0, 0, 0));
 		Titulo.setForeground(new Color(0, 0, 0));
 		Titulo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -39,18 +42,10 @@ public class PantallaInicio  extends JPanel{
 		lblNewLabel.setBounds(0, 0, 138, 76);
 		add(lblNewLabel);
 		
+		JLabel camarero = new JLabel("");
+		camarero.setIcon(new ImageIcon("./camareroR.png"));
+		camarero.setBounds(354, 7, 86, 50);
+		add(camarero);
+		
 	}
-public void cargaSalon() {
-		
-		pantallaTerraza.setVisible(false);
-	pantallaSalon.setVisible(true);
-		
-		}
-	
-	public void cargaTerraza() {
-	pantallaSalon.setVisible(false);
-	pantallaTerraza.setVisible(true);
-		
-		}
-	
 }

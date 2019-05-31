@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 
+import clases.Camarero;
 import clases.Mesa;
 import clases.Productos;
 import clases.Productos.TipoProducto;
@@ -19,11 +20,14 @@ import clases.Productos.TipoProducto;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.BreakIterator;
+import java.time.LocalDate;
 
 public class Principal extends JPanel {
 	private Ventana ventana;
@@ -96,7 +100,7 @@ public class Principal extends JPanel {
 		BImprimir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				factura(mesa.getNumeroMesa());
+				camarerno(mesa.getNumeroMesa());
 			}
 		});
 		BImprimir.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
@@ -107,6 +111,10 @@ public class Principal extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ventana.cargaPantallaInicio();
+				
+				if(mesa.getProductosConsumidos().size()==0) {
+					mesa.setLibre();
+				}
 			}
 		});
 		BPendiente.setFont(new Font("Agency FB", Font.BOLD | Font.ITALIC, 16));
@@ -475,12 +483,16 @@ public class Principal extends JPanel {
 		System.out.println(lista.getComponentCount());
 		lista.setLayout(new GridLayout(mesa.getProductosConsumidos().size(),1));
 		float total=0;
+		JLabel pepe=null;
+		
 		for(int i=0;i<mesa.getProductosConsumidos().size();i++) {
 			
-			lista.add(new JLabel(mesa.getProductosConsumidos().get(i).getNombre()+""+mesa.getProductosConsumidos().get(i).getPrecio()+"€"+add(new JButton("+"))+add(new JButton("-"))));
+			lista.add(pepe=new JLabel(mesa.getProductosConsumidos().get(i).getNombre()+""+mesa.getProductosConsumidos().get(i).getPrecio()+"€ \n"));
 
 			total+=mesa.getProductosConsumidos().get(i).getPrecio();
 		}
+		
+		
 		labelTotal.setText(total+"");
 		lista.setVisible(false);
 	
@@ -489,53 +501,26 @@ public class Principal extends JPanel {
 	
 	public void cobrar() {
 		mesa.setLibre();
+		lista.removeAll();
+	ventana.cargaPantallaInicio();
+	mesa.getProductosConsumidos().clear();
+	
 	}
+	
 	/**
 	 * Imprime en un Fichero .TXT la factura total 
 	 * @param a numero de la mesa pasado por parametros
 	 */
-	public void factura(int a) {
+	public void camarerno(int a) {
 		if(mesa.getCamarero()==null) {
 			Camareros c=new Camareros(mesa);
 			c.setVisible(true);
+			
+		}else {
+			mesa.factura(mesa.getNumeroMesa());
 		}
-		FileWriter fichero = null;
-        PrintWriter pw = null;
-        float total= 0;
-        try
-        {
-        	
-            fichero = new FileWriter("./Factura"+a+".txt");
-            pw = new PrintWriter(fichero);
-            
-            pw.println("RESTAURANTE CENEC");
-            pw.println();
-            pw.println("__________________________");
-            pw.println("   El numero de mesa es:  "+mesa.getNumeroMesa());
-            pw.println("|                            |");
-            pw.println("   La fecha es :    "+mesa.getFecha());
-            pw.println("|                            |");
-            pw.println("__________________________");
-            for (int i = 0; i < mesa.getProductosConsumidos().size(); i++) {
-            	     pw.println(i+" |"+mesa.getProductosConsumidos().get(i).getNombre()+"  "+mesa.getProductosConsumidos().get(i).getPrecio());
-            	     total+=mesa.getProductosConsumidos().get(i).getPrecio();
-            }
-            pw.print("---------------");
-            pw.print("                "+total+"€");
-           
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-           try {
-           // Nuevamente aprovechamos el finally para 
-           // asegurarnos que se cierra el fichero.
-           if (null != fichero)
-              fichero.close();
-           } catch (Exception e2) {
-              e2.printStackTrace();
-           }
-        }
+		
 		
 	}
 }

@@ -7,6 +7,7 @@ import clases.Mesa;
 import excepciones.DniInvalidoException;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,50 +18,54 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
 
 public class RegistroCamarero extends JDialog {
+	private JDialog thisRef;
 	private Ventana ventana;
 	private JTextField textFieldNombre;
 	private JTextField textFieldDni;
 	private JTextField textFieldTipodecamarero;
-
+private Mesa  mesa;
 	
 	
 public RegistroCamarero() {
 	super();
-	setSize(480,200);
-	setLayout(null);
+	setTitle("Registro camareros");
+	setSize(500,300);
+	setLocation(400,300);
+	getContentPane().setLayout(null);
 	
 	JLabel registro = new JLabel("Registro Camarero");
 	registro.setBounds(98, 11, 96, 14);
-	add(registro);
+	getContentPane().add(registro);
 	
 	textFieldNombre = new JTextField();
 	textFieldNombre.setBounds(173, 56, 86, 20);
-	add(textFieldNombre);
+	getContentPane().add(textFieldNombre);
 	textFieldNombre.setColumns(10);
 	
 	textFieldDni = new JTextField();
 	textFieldDni.setBounds(173, 87, 86, 20);
-	add(textFieldDni);
+	getContentPane().add(textFieldDni);
 	textFieldDni.setColumns(10);
 	
 	textFieldTipodecamarero = new JTextField();
 	textFieldTipodecamarero.setBounds(173, 115, 86, 20);
-	add(textFieldTipodecamarero);
+	getContentPane().add(textFieldTipodecamarero);
 	textFieldTipodecamarero.setColumns(10);
 	
 	JLabel lblNombre = new JLabel("Nombre : ");
 	lblNombre.setBounds(72, 59, 86, 14);
-	add(lblNombre);
+	getContentPane().add(lblNombre);
 	
 	JLabel lblDni = new JLabel("DNI :");
 	lblDni.setBounds(72, 90, 46, 14);
-	add(lblDni);
+	getContentPane().add(lblDni);
 	
 	JLabel lblTipoDeCamarero = new JLabel("Tipo de camarero");
 	lblTipoDeCamarero.setBounds(72, 118, 118, 14);
-	add(lblTipoDeCamarero);
+	getContentPane().add(lblTipoDeCamarero);
 	
 	JButton btnAceptar = new JButton("Aceptar");
 	btnAceptar.addMouseListener(new MouseAdapter() {
@@ -76,6 +81,7 @@ public RegistroCamarero() {
 			 Statement stmte = ventana.getConnection().createStatement();
 			 stmte.executeUpdate("insert into camarero(dni,nombre,tipoDeCamarero) values('"+dni+"','"+nombre+"','"+tipo+"')");
 	stmte.close();
+	JOptionPane.showMessageDialog(ventana, "Camarero Registrado","Registro",JOptionPane.INFORMATION_MESSAGE);
 		} catch (DniInvalidoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,22 +93,14 @@ public RegistroCamarero() {
 		}
 	});
 	btnAceptar.setBounds(203, 166, 89, 23);
-	add(btnAceptar);
+	getContentPane().add(btnAceptar);
 	
-	JButton btnCancelar = new JButton("Cancelar");
-	btnCancelar.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			
-
-			
-			
-			
-			//TODO se pilla 
-		}
-	});
-	btnCancelar.setBounds(98, 166, 89, 23);
-	add(btnCancelar);
+	
+	
+	JLabel fotoCamarero = new JLabel("");
+	fotoCamarero.setIcon(new ImageIcon("./camarero.png"));
+	fotoCamarero.setBounds(268, 11, 216, 251);
+	getContentPane().add(fotoCamarero);
 	
 	
 

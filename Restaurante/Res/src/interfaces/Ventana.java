@@ -37,7 +37,9 @@ public class Ventana extends JFrame{
 	public HashMap<Integer, Mesa> getMesas() {
 		return mesas;
 	}
-
+/*
+ * Es el unico JFrame del programa 
+ */
 	public Ventana() {
 		super();
 		this.setTitle("Restaurante Cenec");
@@ -66,7 +68,9 @@ public class Ventana extends JFrame{
 		}
 		
 	}
-
+/**
+ * Carga la pantalla incio que es el menu de las terraza y el salon 
+ */
 	public void cargaPantallaInicio() {
 		//No hay por qué comprobar si es nula.
 		//Nunca lo va  a ser: es la pantalla por
@@ -90,7 +94,10 @@ public class Ventana extends JFrame{
 }
 	
 	
-	
+	/**
+	 * Carga las mesas de la pantalla inicio
+	 * @param n es el numeor de la mesa 
+	 */
 	public void cargaPrincipal(int n) {
 
 		if(this.pantallasPrincipal==null) {
@@ -130,7 +137,9 @@ public class Ventana extends JFrame{
 	public static Connection getConnection() {
 		return connection;
 	}
-
+/**
+ * Funcion que desconect6a la base de datos
+ */
 	public static void desconectar() {
 		try {
 			connection.close();
